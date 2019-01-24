@@ -36,7 +36,7 @@ module ApplicationHelper
   #   current_controller?('gitlab/application') # => false
   def current_controller?(*args)
     args.any? do |v|
-      v.to_s.downcase == controller.controller_name || v.to_s.downcase == controller.controller_path
+      v.to_s.downcase == controller_name || v.to_s.downcase == controller_path
     end
   end
 
@@ -281,8 +281,8 @@ module ApplicationHelper
 
   def client_js_flags
     {
-      "is#{browser.id.to_s.titlecase}": true,
-      "is#{browser.platform.id.to_s.titlecase}": true
+        "is#{browser.id.to_s.titlecase}": true,
+        "is#{browser.platform.id.to_s.titlecase}": true
     }
   end
 
@@ -290,13 +290,13 @@ module ApplicationHelper
     return {} unless object && noteable_type
 
     {
-      members: members_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
-      issues: issues_project_autocomplete_sources_path(object),
-      mergeRequests: merge_requests_project_autocomplete_sources_path(object),
-      labels: labels_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
-      milestones: milestones_project_autocomplete_sources_path(object),
-      commands: commands_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
-      snippets: snippets_project_autocomplete_sources_path(object)
+        members: members_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
+        issues: issues_project_autocomplete_sources_path(object),
+        mergeRequests: merge_requests_project_autocomplete_sources_path(object),
+        labels: labels_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
+        milestones: milestones_project_autocomplete_sources_path(object),
+        commands: commands_project_autocomplete_sources_path(object, type: noteable_type, type_id: params[:id]),
+        snippets: snippets_project_autocomplete_sources_path(object)
     }
   end
 
