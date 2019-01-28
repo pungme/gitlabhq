@@ -16,9 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const subpath = paths[paths.length - 1];
   let action = loadableActions.includes(subpath) ? subpath : getPagePath(1);
   if (action === 'details') {
-    action = 'show' // 'show' resets GroupTabs to default action through base class
+    action = 'show'; // 'show' resets GroupTabs to default action through base class
   }
-
 
   new GroupTabs({ parentEl: '.groups-listing', action });
   new ShortcutsNavigation();
