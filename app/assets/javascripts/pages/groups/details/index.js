@@ -14,7 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadableActions = [ACTIVE_TAB_SHARED, ACTIVE_TAB_ARCHIVED];
   const paths = window.location.pathname.split('/');
   const subpath = paths[paths.length - 1];
-  const action = loadableActions.includes(subpath) ? subpath : getPagePath(1);
+  let action = loadableActions.includes(subpath) ? subpath : getPagePath(1);
+  if (action === 'details') {
+    action = 'show' // 'show' resets GroupTabs to default action through base class
+  }
+
 
   new GroupTabs({ parentEl: '.groups-listing', action });
   new ShortcutsNavigation();
