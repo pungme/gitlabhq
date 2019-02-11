@@ -8,13 +8,13 @@ module WebpackHelper
   def webpack_controller_bundle_tags
     chunks = []
 
-    action = case action_name
+    action = case controller.action_name
              when 'create' then 'new'
              when 'update' then 'edit'
-             else action_name
+             else controller.action_name
              end
 
-    route = [*controller_path.split('/'), action].compact
+    route = [*controller.controller_path.split('/'), action].compact
 
     until chunks.any? || route.empty?
       entrypoint = "pages.#{route.join('.')}"

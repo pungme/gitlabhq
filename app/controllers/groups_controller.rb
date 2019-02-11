@@ -30,9 +30,6 @@ class GroupsController < Groups::ApplicationController
   # project information
   skip_cross_project_access_check :show, if: -> { request.format.html? }
 
-  add_controller_action_override 'groups', 'details', initial_action: 'show'
-  set_controller_action_override
-
   layout :determine_layout
 
   def index
@@ -60,28 +57,11 @@ class GroupsController < Groups::ApplicationController
   end
 
   def show
-    # TODO: improve ControllerActionOverride to support template selection for render
-    respond_to do |format|
-      format.html do
-        render :details
-      end
-
-      format.atom do
-        load_events
-        render layout: 'xml.atom', action: :details
-      end
-    end
+    render_details_view
   end
 
   def details
-    respond_to do |format|
-      format.html
-
-      format.atom do
-        load_events
-        render layout: 'xml.atom'
-      end
-    end
+    render_details_view
   end
 
   def activity
@@ -135,6 +115,19 @@ class GroupsController < Groups::ApplicationController
   # rubocop: enable CodeReuse/ActiveRecord
 
   protected
+
+  def render_details_view
+    respond_to do |format|
+      format.html do
+        render 'groups/details'
+      end
+
+      format.atom do
+        load_events
+        render layout: 'xml.atom', template: 'groups/details'
+      end
+    end
+  end
 
   # rubocop: disable CodeReuse/ActiveRecord
   def authorize_create_group!

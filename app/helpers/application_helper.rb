@@ -36,7 +36,7 @@ module ApplicationHelper
   #   current_controller?('gitlab/application') # => false
   def current_controller?(*args)
     args.any? do |v|
-      v.to_s.downcase == controller_name || v.to_s.downcase == controller_path
+      v.to_s.downcase == controller.controller_name || v.to_s.downcase == controller.controller_path
     end
   end
 

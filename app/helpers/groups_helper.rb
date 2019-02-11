@@ -23,6 +23,18 @@ module GroupsHelper
     group_sidebar_links.include?(link)
   end
 
+  def group_view_nav_link_active?(_group_view)
+    # must be false; overridden in EE
+    # will be updated if the Group Overview content is ported to CE, see gitlab-ce/#57236
+    false
+  end
+
+  def group_view_nav_link(group_view:, **options, &block)
+    options = options.merge(active: true) if group_view_nav_link_active?(group_view)
+
+    nav_link(options, &block)
+  end
+
   def can_change_group_visibility_level?(group)
     can?(current_user, :change_visibility_level, group)
   end

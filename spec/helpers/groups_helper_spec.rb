@@ -227,4 +227,11 @@ describe GroupsHelper do
       expect(helper.group_sidebar_links).not_to include(*cross_project_features)
     end
   end
+
+  describe '#group_view_nav_link' do
+    it 'makes link active if eligible' do
+      allow(helper).to receive(:group_view_nav_link_active?).with(any_args).and_return(true)
+      expect(helper.group_view_nav_link(group_view: :dummy_group_view)).to match(/<li class="active">/)
+    end
+  end
 end

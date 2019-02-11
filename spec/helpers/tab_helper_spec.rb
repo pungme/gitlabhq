@@ -15,6 +15,16 @@ describe TabHelper do
       end
     end
 
+    context 'with active flag set externally' do
+      it "marks link a active disregarding other options" do
+        expect(nav_link(active: true, path: 'blah#blah')).to match(/<li class="active">/)
+      end
+
+      it "marks link as inactive disregarding other options" do
+        expect(nav_link(active: false, path: 'foo#foo')).not_to match(/<li class="active">/)
+      end
+    end
+
     context 'with controller param' do
       it "performs checks on the current controller" do
         expect(nav_link(controller: :foo)).to match(/<li class="active">/)
@@ -79,6 +89,7 @@ describe TabHelper do
     it "passes extra html options to the list element" do
       expect(nav_link(action: :foo, html_options: { class: 'home' })).to match(/<li class="home active">/)
       expect(nav_link(html_options: { class: 'active' })).to match(/<li class="active">/)
+      expect(nav_link(active: true, html_options: { class: 'link' })).to match(/<li class="link active">/)
     end
   end
 end

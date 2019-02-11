@@ -20,15 +20,13 @@
               = _('Overview')
 
           %ul.sidebar-sub-level-items
-            = nav_link(path: ['groups#show', 'groups#activity', 'groups#subgroups'], html_options: { class: "fly-out-top-item" } ) do
+            = nav_link(path: ['groups#show', 'groups#details', 'groups#activity', 'groups#subgroups'], html_options: { class: "fly-out-top-item" } ) do
               = link_to group_path(@group) do
                 %strong.fly-out-top-item-name
                   = _('Overview')
             %li.divider.fly-out-top-item
-            = nav_link(path: ['groups#details', 'groups#show', 'groups#subgroups'], html_options: { class: 'home' }) do
-              = link_to details_group_path(@group), title: _('Group details') do
-                %span
-                  = _('Details')
+
+            = render 'groups/sidebar/details'
 
             - if group_sidebar_link?(:activity)
               = nav_link(path: 'groups#activity') do

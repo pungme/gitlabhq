@@ -73,7 +73,9 @@ module TabHelper
   end
 
   def active_nav_link?(options)
-    if path = options.delete(:path)
+    if options.key?(:active)
+      options[:active]
+    elsif path = options.delete(:path)
       unless path.respond_to?(:each)
         path = [path]
       end
