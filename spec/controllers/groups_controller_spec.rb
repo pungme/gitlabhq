@@ -33,13 +33,13 @@ describe GroupsController do
   end
 
   shared_examples 'details view' do
-    it { is_expected.to render_template('groups/details') }
+    it { is_expected.to render_template('groups/show') }
 
     context 'as atom' do
       let!(:event) { create(:event, project: project) }
       let(:format) { :atom }
 
-      it { is_expected.to render_template('groups/details') }
+      it { is_expected.to render_template('groups/show') }
 
       it 'assigns events for all the projects in the group' do
         subject

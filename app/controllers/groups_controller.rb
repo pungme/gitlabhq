@@ -119,12 +119,12 @@ class GroupsController < Groups::ApplicationController
   def render_details_view
     respond_to do |format|
       format.html do
-        render 'groups/details'
+        render 'groups/show'
       end
 
       format.atom do
         load_events
-        render layout: 'xml.atom', template: 'groups/details'
+        render layout: 'xml.atom', template: 'groups/show'
       end
     end
   end
