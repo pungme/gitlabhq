@@ -119,14 +119,22 @@ class GroupsController < Groups::ApplicationController
   def render_details_view
     respond_to do |format|
       format.html do
-        render 'groups/show'
+        render_details_html
       end
 
       format.atom do
-        load_events
-        render layout: 'xml.atom', template: 'groups/show'
+        render_details_atom
       end
     end
+  end
+
+  def render_details_html
+    render 'groups/show'
+  end
+
+  def render_details_atom
+    load_events
+    render layout: 'xml.atom', template: 'groups/show'
   end
 
   # rubocop: disable CodeReuse/ActiveRecord
